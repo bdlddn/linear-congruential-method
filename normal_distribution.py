@@ -62,3 +62,4 @@ if __name__ == "__main__":
 		sx.append(2+3*z)
 		i += 1
 	print(len(sx))
+	print(len(sx))
