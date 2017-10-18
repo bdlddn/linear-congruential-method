@@ -40,12 +40,24 @@ def compute_pi(sx,sy,m):
 	"""¼ÆËãpiµÄÖµ"""
 	#~ s_len = len(sx)
 	count = 0
-	i = 0
+	i = 1
+	
+	#~ x = sx[0]*65536 + sx[0]
+	#~ print(x)
+	lenth = 1
 	while i < m:
-		if math.sqrt(sx[i]*sx[i] + sy[i]*sy[i]) < 1:
-			count += 1
-		i += 1
-	pi = 4 * count / m
+		#~ x = sx[i]*65536*65536 + sy[i]*65536
+		#~ y = sx[i]*65536*65536 + sx[i]*65536
+		#~ j = j * 3 % m
+		#~ k = k * 5 % m
+		j = 1
+		while j < m:
+			if math.sqrt(sx[i]*sx[i] + sy[j]*sy[j]) < 1:
+				count += 1
+			j += lenth
+		i += lenth
+		
+	pi = 4 * count / (m * m) * lenth * lenth
 	return pi
 	
 if __name__ == "__main__":
@@ -54,17 +66,17 @@ if __name__ == "__main__":
 	#~ k2 = 5
 	k_list = [3,5,7,11,13,17,19,23,31,37]
 	total_times = 1
-	m = 65536 * 2
+	m = 65536
 	c = 5
 	s0 = 1
 	i = 0
 	while i < total_times:
 		k1 = k_list[i]
-		k2 = k_list[i+1]
+		k2 = k_list[i+6]
 		j = 0
 		pi_true = 3.14159265
 		pi_min = 3
-		while j < 1000:
+		while j < 1:
 			
 			sx = make_random_list(m,4*k1+1,c,s0+j)
 			sy = make_random_list(m,4*k2+1,c,s0)
@@ -81,4 +93,4 @@ if __name__ == "__main__":
 		i += 1
 		
 	print(pi_sum/total_times)
-	print(1/3)
+	#~ print(1/3)

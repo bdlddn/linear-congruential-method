@@ -22,6 +22,7 @@
 #  
 #  
 
+import matplotlib.pyplot as plt
 
 def make_random_list(m,a,c,s0):
 	"""线性同余法生成伪随机序列"""
@@ -61,4 +62,10 @@ if __name__ == "__main__":
 		z = total - 6
 		sx.append(2+3*z)
 		i += 1
-	print(len(sx))
+	#~ print(len(sx))
+	plt.plot(sx)
+	count_number = []
+	#~ for()
+	#~ for x in sx:
+		
+	
