@@ -27,70 +27,74 @@ def make_random_list(m,a,c,s0):
 	"""线性同余法生成伪随机序列"""
 	s = []
 	s.append(s0)
-	s_float = []
-	s_float.append(s[0]/m)
+	#~ s_float = []
+	#~ s_long = []
+	#~ s_float.append(s[0]/m)
+	#~ s_long.append(s[0])
 	i = 0
 	while i < m:
 		 s.append((s[i]*a+c)%m)
-		 s_float.append(s[i+1]/m)
+		 #~ s_float.append(s[i+1]/m)
+		 #~ s_long.append(s[i+1])
 		 i += 1
-	return s_float
+	#~ return s_float
+	return s
+
+def make_pair(sx, sy, m):
+	"""将两个数组高低拼接起来提高精度"""
+	lenth = len(sx)
+	s = []
+	i = 0 
+	while i < lenth:
+		s.append(sx[i]*m + sy[i])
+		i += 1
+	return s
+	
+	
 
 def compute_pi(sx,sy,m):
 	"""计算pi的值"""
-	#~ s_len = len(sx)
 	count = 0
 	i = 1
-	
-	#~ x = sx[0]*65536 + sx[0]
-	#~ print(x)
-	lenth = 1
+	lenth = 2
 	while i < m:
-		#~ x = sx[i]*65536*65536 + sy[i]*65536
-		#~ y = sx[i]*65536*65536 + sx[i]*65536
-		#~ j = j * 3 % m
-		#~ k = k * 5 % m
 		j = 1
 		while j < m:
-			if math.sqrt(sx[i]*sx[i] + sy[j]*sy[j]) < 1:
+			if math.sqrt(sx[i]*sx[i] + sy[j]*sy[j]) < m * m:
 				count += 1
 			j += lenth
 		i += lenth
-		
-	pi = 4 * count / (m * m) * lenth * lenth
+	pi = float(4 * count / (m * m) * lenth * lenth)
 	return pi
 	
 if __name__ == "__main__":
 	pi_sum = 0.0
-	#~ k1 = 3
-	#~ k2 = 5
 	k_list = [3,5,7,11,13,17,19,23,31,37]
 	total_times = 1
 	m = 65536
 	c = 5
 	s0 = 1
 	i = 0
+	#  多次执行求平均，目前只执行了一次
 	while i < total_times:
 		k1 = k_list[i]
-		k2 = k_list[i+6]
+		k2 = k_list[i+1]
+		k3 = k_list[i+2]
+		k4 = k_list[i+3]
 		j = 0
-		pi_true = 3.14159265
-		pi_min = 3
 		while j < 1:
 			
-			sx = make_random_list(m,4*k1+1,c,s0+j)
-			sy = make_random_list(m,4*k2+1,c,s0)
-			pi = compute_pi(sx,sy,m)
-			if abs(pi-pi_true) < abs(pi_min-pi_true):
-				pi_min = pi
-			#~ print(pi_min)
+			sx = make_random_list(m,4*k1+1,c,s0+1)
+			sy = make_random_list(m,4*k2+1,c,s0+500)
+			sk = make_random_list(m,4*k3+1,c,s0+1000)
+			sz = make_random_list(m,4*k4+1,c,s0+2000)
+			ssx = make_pair(sx, sy, m)
+			ssy = make_pair(sk, sz, m)
+			pi = compute_pi(ssx, ssy, m)
+			print(pi)
 			j += 1
-		print(pi_min)
-		#~ print(pi)
+			
 		pi_sum += pi
-		#~ k1 += 2
-		#~ k2 += 2
 		i += 1
 		
 	print(pi_sum/total_times)
-	#~ print(1/3)

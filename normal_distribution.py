@@ -36,6 +36,33 @@ def make_random_list(m,a,c,s0):
 		 s_float.append(s[i+1]/m)
 		 i += 1
 	return s_float
+	
+def print_list(sx):
+	"""将排好序的数列进行绘制"""
+	lenth = len(sx)
+	min_value = sx[0]
+	max_value = sx[lenth - 1]
+	value_range = max_value - min_value
+	
+	n = 50
+	
+	jump_range = value_range / n
+	
+	result_list = []
+	
+	i = 0
+	
+	while i < n + 1:
+		result_list.append(0)
+		i += 1
+	
+	for s in sx:
+		i = int((s - min_value)/jump_range)
+		result_list[i] += 1
+	print(result_list)
+	plt.plot(result_list)
+	plt.show()
+		
 
 if __name__ == "__main__":
 	i = 0
@@ -46,11 +73,9 @@ if __name__ == "__main__":
 	m = 65536
 	while i < 12:
 		k = k + 1
-		s = make_random_list(m,4*(k+i),c,s0+i)
+		s = make_random_list(m,4*k+1,c,s0+i)
 		s_total.append(s)
 		i += 1
-	#~ print(len(s_total))
-	#~ print(len(s_total[0]))
 	sx = []
 	i = 0
 	while i < m:
@@ -62,10 +87,8 @@ if __name__ == "__main__":
 		z = total - 6
 		sx.append(2+3*z)
 		i += 1
-	#~ print(len(sx))
-	plt.plot(sx)
-	count_number = []
-	#~ for()
-	#~ for x in sx:
+	
+	sx.sort()
+	print_list(sx)
 		
 	
