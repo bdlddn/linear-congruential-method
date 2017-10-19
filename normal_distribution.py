@@ -59,7 +59,8 @@ def print_list(sx):
 	for s in sx:
 		i = int((s - min_value)/jump_range)
 		result_list[i] += 1
-	print(result_list)
+	#~ print(result_list)
+	# 绘制正态分布结果
 	plt.plot(result_list)
 	plt.show()
 		
